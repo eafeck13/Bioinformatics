@@ -23,7 +23,7 @@ chowdary.testLabels #appears that the model predicts w/ 100% accuracy
 
 #deeper analysis of training model
 
-library(gmodels) #after installing
+library(gmodels) 
 
 CrossTable(x = chowdary.testLabels, y = chow_pred, prop.chisq=FALSE) #cross tabulation
 #if all predictions is correct for a species, there will only be one box with a number and the rest 0
@@ -34,4 +34,10 @@ library(MASS)
 
 chowdary.lda <- lda(type ~ . , data = chowdary)
 table(predict(chowdary.lda, type="class")$class, chowdary$type)
+
+#ROC Curve
+
+install.packages("pROC")
+library(pROC)
+
 
