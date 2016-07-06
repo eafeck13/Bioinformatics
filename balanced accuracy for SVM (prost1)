@@ -1,0 +1,25 @@
+##Balanced Accuracy for SVM
+
+install.packages("rocc")
+library(rocc)
+
+#transpose data frame so o.rocc function will work
+
+prost1_typeP_matrix <- as.matrix(prost1_typeP, rownames.force = NA)
+
+prost1_gene_matrix <- as.matrix(prost1_gene_df, rownames.force = NA)
+
+prost1_matrix <- cbind2(prost1_typeP_matrix,prost1_gene_matrix)
+
+prost1_matrixT <- t(prost1_matrix)
+
+#code cancer type as dummies
+
+typeP <- prost1_typeP$typeP
+
+dummy_typeP <- factor(typeP, c("0", "1"), labels = c(0, 1))
+
+#run o.rocc to obtain balanced accuracy rate
+
+o.rocc(prost1_matrixT,dummy_typeP,xgenes = 102)
+
